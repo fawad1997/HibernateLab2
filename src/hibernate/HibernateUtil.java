@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class HibernateUtil {
     private static SessionFactory sessionFactory = null;
+    private static Session session = null;
     public static SessionFactory getSessionFactory()
     {
         if (sessionFactory == null)
@@ -31,6 +32,12 @@ public class HibernateUtil {
     public static Session openSession()
     {
         return getSessionFactory().openSession();
+    }
+    public static Session getCurrentSession(){
+        if(session==null){
+            session = openSession();
+        }
+        return session;
     }
     public static void closeSession(Session session)
     {

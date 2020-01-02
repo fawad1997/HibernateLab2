@@ -1,5 +1,7 @@
 package bean;
 
+import dao.DAOImplementation.StudentDAO;
+import dao.common.DaoFactory;
 import entities.StudentEntity;
 import hibernate.HibernateUtil;
 import org.hibernate.Session;
@@ -10,10 +12,14 @@ import sun.applet.Main;
 
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 @ManagedBean
 public class StudentBean implements Serializable {
     private Student student;
+    private List<Student> students;
 
     public StudentBean() {
         this.student = new Student();
@@ -36,5 +42,29 @@ public class StudentBean implements Serializable {
         session.beginTransaction().commit();
         session.close();
         return "index";
+    }
+
+    public List<Student> getAllStudents(){
+
+        try {
+            List<StudentEntity> entities = DaoFactory.getStudentDAO().findAll();
+            students = new ArrayList<Student>();
+            for (int i=0;i<entities.size();i++){
+                Student std = new Student();
+                std.setId(entities.get(i).getId());
+                std.setName(entities.get(i).getName());
+                std.setEmail(entities.get(i).getEmail());
+                students.add(std);
+            }
+            //connection.getConnection().close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return students;
+    }
+    public List<Student> getDataTable() {
+        if (students == null)
+            students = getAllStudents();
+        return students;
     }
 }

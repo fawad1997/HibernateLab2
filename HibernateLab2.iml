@@ -32,5 +32,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.46" level="application_server_libraries" />
     <orderEntry type="library" name="JSF" level="project" />
     <orderEntry type="library" name="mysql-connector" level="project" />
+    <orderEntry type="library" name="PrimeFaces-6.1" level="project" />
   </component>
 </module>

@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
 <h:head>
     <title>Hibernate Lab</title>
 </h:head>
@@ -14,6 +15,18 @@
         Email : <h:inputText value="#{studentBean.student.email}"/><br/>
         Password : <h:inputSecret value="#{studentBean.student.password}"/><br/>
         <h:commandButton value="Save" action="#{studentBean.saveToDb}"/>
+        <hr/>
+        <p:dataTable value="#{studentBean.dataTable}" var="student">
+            <p:column headerText="Id" sortBy="#{student.id}">
+                <h:outputText value="#{student.id}"></h:outputText>
+            </p:column>
+            <p:column headerText="Name" sortBy="#{student.firstName}">
+                <h:outputText value="#{student.name}"></h:outputText>
+            </p:column>
+            <p:column headerText="Email" sortBy="#{student.email}">
+                <h:outputText value="#{student.email}"></h:outputText>
+            </p:column>
+        </p:dataTable>
     </h:form>
 </h:body>
 </html>
